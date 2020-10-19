@@ -35,6 +35,8 @@ namespace RealmCommander
       services.AddTransient<IDbConnection>(x => CreateDBContext());
       services.AddTransient<KnightsRepository>();
       services.AddTransient<KnightsService>();
+      services.AddTransient<QuestsRepository>();
+      services.AddTransient<QuestsService>();
     }
 
     private IDbConnection CreateDBContext()

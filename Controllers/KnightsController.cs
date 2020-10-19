@@ -29,7 +29,7 @@ namespace RealmCommander.Controllers
     [HttpPost]
     public ActionResult<Knight> Create([FromBody] Knight knight)
     {
-      return Ok(_service.Create(knight.Name));
+      return Ok(_service.Create(knight));
     }
 
     // Edit One

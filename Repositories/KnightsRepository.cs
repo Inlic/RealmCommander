@@ -6,7 +6,7 @@ using RealmCommander.Models;
 
 namespace RealmCommander.Repositories
 {
-  public class KnightsRepository
+  public class KnightsRepository : IRepository<Knight>
   {
     private readonly IDbConnection _db;
     public KnightsRepository(IDbConnection db)
@@ -14,13 +14,14 @@ namespace RealmCommander.Repositories
       _db = db;
     }
 
-    public Knight Create(string name)
+    public Knight Create(Knight knight)
     {
       int id = _db.ExecuteScalar<int>(@"
       INSERT INTO knights(name) VALUES (@name);
-       SELECT LAST_INSERT_ID()", new { name }
+       SELECT LAST_INSERT_ID()", knight
       );
-      return new Knight() { Name = name, Id = id };
+      knight.Id = id;
+      return knight;
     }
     public bool Delete(int id)
     {
@@ -30,7 +31,7 @@ namespace RealmCommander.Repositories
       return success > 0;
     }
 
-    public Knight FindOneById(int id)
+    public Knight FindById(int id)
     {
       return _db.Query<Knight>(@"
       SELECT * FROM knights WHERE id = @id

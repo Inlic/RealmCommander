@@ -12,9 +12,9 @@ namespace RealmCommander.Services
       _repo = repo;
     }
 
-    public Knight Create(string name)
+    public Knight Create(Knight knight)
     {
-      return _repo.Create(name);
+      return _repo.Create(knight);
     }
     public bool Delete(int id)
     {
@@ -22,7 +22,7 @@ namespace RealmCommander.Services
     }
     public Knight FindById(int id)
     {
-      return _repo.FindOneById(id);
+      return _repo.FindById(id);
     }
     public List<Knight> Find()
     {

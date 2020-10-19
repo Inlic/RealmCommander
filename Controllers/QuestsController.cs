@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using RealmCommander.Models;
 using RealmCommander.Services;
 
 namespace RealmCommander.Controllers
@@ -10,29 +12,29 @@ namespace RealmCommander.Controllers
     private readonly QuestsService _service;
 
     [HttpGet]
-    public void Get()
+    public ActionResult<IEnumerable<Quest>> Get()
     {
-
+      return Ok(_service.Find());
     }
-    [HttpGet("{id")]
-    public void Get(int id)
+    [HttpGet("{id}")]
+    public ActionResult<Quest> Get(int id)
     {
-
+      return Ok(_service.FindById(id));
     }
     [HttpPost]
-    public void Create()
+    public ActionResult<Quest> Create([FromBody] Quest q)
     {
-
+      return Ok(_service.Create(q));
     }
-    [HttpPut]
+    [HttpPut("{id}")]
     public void Update(int id)
     {
 
     }
-    [HttpDelete]
-    public void Delete(int id)
+    [HttpDelete("{id}")]
+    public ActionResult<bool> Delete(int id)
     {
-
+      return Ok(_service.Delete(id));
     }
     public QuestsController(QuestsService service)
     {
