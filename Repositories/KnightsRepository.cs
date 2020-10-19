@@ -31,6 +31,15 @@ namespace RealmCommander.Repositories
       return success > 0;
     }
 
+    public Knight Update(Knight knight)
+    {
+      _db.Execute(@"
+      UPDATE knights
+      SET name = @Name WHERE id = @Id;
+      ", knight);
+      return knight;
+    }
+
     public Knight FindById(int id)
     {
       return _db.Query<Knight>(@"

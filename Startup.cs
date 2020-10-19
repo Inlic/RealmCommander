@@ -32,7 +32,7 @@ namespace RealmCommander
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllers();
-      services.AddTransient<IDbConnection>(x => CreateDBContext());
+      services.AddScoped<IDbConnection>(x => CreateDBContext()); //scoped will use less uptime than transient
       services.AddTransient<KnightsRepository>();
       services.AddTransient<KnightsService>();
       services.AddTransient<QuestsRepository>();
