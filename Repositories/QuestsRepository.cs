@@ -17,8 +17,9 @@ namespace RealmCommander.Repositories
     public Quest Create(Quest quest)
     {
       int id = _db.ExecuteScalar<int>(@"
-      INSERT INTO quest (title, description)
-      VALUES (@Title, @Description)
+      INSERT INTO quests (title, description, completed)
+      VALUES (@Title, @Description @Completed);
+      SELECT LAST_INSERT_ID();
       ", quest);
       quest.Id = id;
       return quest;

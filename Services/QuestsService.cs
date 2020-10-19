@@ -14,6 +14,10 @@ namespace RealmCommander.Services
     }
     public Quest Create(Quest q)
     {
+      //business rule
+      //user == role admin
+      // allow the quest.completed
+
       return _repo.Create(q);
     }
 
